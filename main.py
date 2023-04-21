@@ -1,25 +1,26 @@
 import openai_integration
 
 
-def build_prompt(outreach_content, link_target_content):
-    base_prompt = "I am pasting you two articles. The first, named OutreachTarget is the article of the website that we are contacting. The second, named LinkTarget is the article that we want to get a backlink from. It is possible that the original articles are too long for you to process. That is why we will preprocess the article if it is too long and only send you the beginning and the end of the articles. However, those parts of the article probably will contain the most dense information and provide you with sufficient context. Do not confuse those two articles with each other. Next I am sending the articles."
-    final_prompt = base_prompt + "OutreachTarget: " + outreach_content + "This was the end of the OutreachTarget text. Next comes the LinkTarget text: " + link_target_content
-    return final_prompt
+def build_prompt(disease, language="English"):
+    if disease == "GERD":
+        disease_prompt = "Provide a fitting recipe for a patient with gastroesophageal reflux."
+    else:
+        disease_prompt = "Provide a fitting recipe for a patient with " + disease + "."
 
-def process_request(outreach_target, link_target):
-    outreach_content = page_parser.parse(outreach_target)
-    outreach_content = truncate_input(outreach_content, MAX_CHAR_LENGTH_OUTREACH_TARGET)
-    link_target_content = page_parser.parse(link_target)
-    link_target_content = truncate_input(link_target_content, MAX_CHAR_LENGTH_LINK_TARGET)
+    language_prompt = "The patient speaks " + language + "." + " Therefore provide the recipe in native level " + language + "."
+    return disease_prompt + " " + language_prompt
 
+
+def process_request(disease, language="English"):
     gpt_api = openai_integration.GptApi()
-    prompt = build_prompt(outreach_content, link_target_content)
+    gpt_api.set_system_message = "You are a a highly skilled dietician who recommends patients fitting but tasty recipes to help relief symptoms of their disease. You will be given the specific disease that the recipe is supposed to help with. You may or may not be given additional contraints to fulfill. Additionally to the recipe, provide a explanation why this recipe is good for a specific disease. Do not talk about yourself, only provide the recipes and other requested information."
+    prompt = build_prompt(disease, language)
     ai_answer = gpt_api.send(prompt)
     return ai_answer
 
-if __name__ == "__main__":
-    link_target = "https://www.refluxgate.de/sodbrennen"
-    outreach_target = "https://www.sodbrennen.de/ursachen-sodbrennen/"
 
-    answer = process_request(outreach_target, link_target)
+if __name__ == "__main__":
+
+    disease = "SIBO"
+    answer = process_request(disease)
     print(answer)

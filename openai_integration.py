@@ -7,7 +7,8 @@ with open("keys/openai", "r") as f:
 class GptApi:
     def __init__(self, model="gpt-3.5-turbo"):
         self.model = model
-        self.set_system_message = "You are a Digital PR specialist. Your job is to generate backlinks by reaching out to website owners. Write a message that is innovative. Dont be boring. Be specific about why we reach out specifically for this piece of content that the website owner published and why it fits to our content. Most important, avoid writing the email like a typical outreach email. We want to stand out. Write the email in German. Dont be uptight. Be informal. Write the email in German. You have native level German skills."
+        self.set_system_message = "You are a helpful assistant."
+
     def set_new_system_message(self, message):
         self.set_system_message = message
         return
@@ -24,6 +25,6 @@ class GptApi:
 
 if __name__ == '__main__':
     api = GptApi()
-    reply = api.send("reach out to the owner of the site refluxgate.com and ask them to link to my site")
+    reply = api.send("create a recipe for GERD")
     print(reply)
 
