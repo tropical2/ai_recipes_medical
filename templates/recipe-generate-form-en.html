@@ -1,10 +1,5 @@
 {% extends "base-recipe-generator.html" %}
 
-{% block scripts %}
-    <script>
-        var submit_form_url = "{{ url_for('submit_form_en') }}";
-    </script>
-{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -38,3 +33,8 @@
     </div>
 {% endblock %}
 
+{% block endbody %}
+    <script>
+        var submit_form_url = "{{ url_for('submit_form_en') }}";
+    </script>
+{% endblock %}
