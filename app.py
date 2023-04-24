@@ -34,12 +34,12 @@ def setup_logging():
 setup_logging()
 
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('recipe_generate_form.html')
+@app.route('/recipe_generator_en', methods=['GET'])
+def recipe_generator_en():
+    return render_template('recipe_generate_form_en.html')
 
-@app.route('/submit_form', methods=['POST'])
-def submit_form():
+@app.route('/submit_form_en', methods=['POST'])
+def submit_form_en():
     dropdown = request.form.get('dropdown')
     text_input = request.form.get('text_input')
     print(f'Dropdown: {dropdown}, Text Input: {text_input}')
