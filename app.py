@@ -1,11 +1,10 @@
 import logging
+import time
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask, render_template, request, redirect, url_for
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-Bootstrap(app)
 
 def setup_logging():
     log_level = logging.DEBUG if app.debug else logging.INFO
@@ -34,16 +33,22 @@ def setup_logging():
 setup_logging()
 
 
-@app.route('/recipe_generator_en', methods=['GET'])
+@app.route('/recipe-generator-en', methods=['GET'])
 def recipe_generator_en():
-    return render_template('recipe_generate_form_en.html')
+    return render_template('recipe-generate-form-en.html')
 
-@app.route('/submit_form_en', methods=['POST'])
+@app.route('/submit-form-en', methods=['POST'])
 def submit_form_en():
-    dropdown = request.form.get('dropdown')
-    text_input = request.form.get('text_input')
-    print(f'Dropdown: {dropdown}, Text Input: {text_input}')
-    return redirect(url_for('index'))
+    # Extract the form data from the request
+    dropdown_value = request.form.get('dropdown')
+    text_input_value = request.form.get('text_input')
+
+    # Process the form data (add your processing logic here)
+    # This is just a simple example, replace it with your actual processing logic
+    output = f'Processed data for condition {dropdown_value} and text input {text_input_value}'
+    time.sleep(10)
+    # Return the generated output text as a plain text response
+    return output
 
 if __name__ == '__main__':
     app.run(debug=True)
