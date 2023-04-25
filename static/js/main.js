@@ -1,4 +1,26 @@
 console.log("Start of main.js script");
+
+function updateInfo() {
+    const dropdown = document.getElementById("dropdown");
+    const info = document.getElementById("info");
+
+    if (dropdown.value === "LPR") {
+        info.innerHTML = "Will avoid typical reflux trigger foods like garlic, spicy foods, fried foods, chocolate, etc. Also avoids low pH foods which can reactivate the stomach enzyme pepsin in the throat.";
+    } else if (dropdown.value === "GERD") {
+        info.innerHTML = "Will avoid typical reflux trigger foods like garlic, spicy foods, fried foods, chocolate, etc.";
+    } else if (dropdown.value === "SIBO") {
+        info.innerHTML = "Will avoid typical SIBO trigger foods.";
+    }
+
+    if (dropdown.value) {
+        info.style.display = "block";
+    } else {
+        info.style.display = "none";
+    }
+}
+
+document.getElementById("dropdown").addEventListener("change", updateInfo);
+
 document.getElementById("my-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -29,3 +51,6 @@ document.getElementById("my-form").addEventListener("submit", function(event) {
         console.error("Error:", error);
     });
 });
+
+updateInfo(); // Update the info text when the page loads
+
