@@ -1,4 +1,7 @@
 import openai
+import logging
+
+logger = logging.getLogger()
 
 with open("keys/openai", "r") as f:
     openai.api_key = f.readline()
@@ -10,6 +13,7 @@ class GptApi:
         self.set_system_message = "You are a helpful assistant."
 
     def set_new_system_message(self, message):
+        logger.debug('Setting new system message')
         self.set_system_message = message
         return
 
@@ -18,6 +22,7 @@ class GptApi:
             {"role": "assistant", "content": self.set_system_message},
             {"role": "user", "content": prompt},
         ]
+        logger.debug('Sending request to OpenAI')
         completion = openai.ChatCompletion.create(model=self.model, messages=messages)
         reply = completion.choices[0].message.content
         return reply
