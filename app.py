@@ -42,12 +42,14 @@ def submit_form_en():
     logger.debug('Received a form submission through submit-form-en')
     # Extract the form data from the request
     dropdown_value = request.form.get('dropdown')
-    text_input_value = request.form.get('text_input')
+    instructions = request.form.get('text_input')
 
+    if instructions == "":
+        instructions == None
 
     # Process the form data (add your processing logic here)
     # This is just a simple example, replace it with your actual processing logic
-    output = processing.process_request(dropdown_value, "English")
+    output = processing.process_request(dropdown_value, instructions, "English")
 
     # Return the generated output text as a plain text response
     return output

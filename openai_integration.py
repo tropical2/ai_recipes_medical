@@ -23,8 +23,30 @@ class GptApi:
             {"role": "user", "content": prompt},
         ]
         logger.debug('Sending request to OpenAI')
-        completion = openai.ChatCompletion.create(model=self.model, messages=messages)
-        reply = completion.choices[0].message.content
+
+        max_retries = 3
+        current_retries = 0
+        success = False
+        while max_retries >= current_retries:
+            try:
+                completion = openai.ChatCompletion.create(model=self.model, messages=messages)
+                success = True
+                break
+            except openai.error.RateLimitError as e:
+                logger.warning('OpenAI API is overloaded')
+                logger.warning(e)
+                current_retries += 1
+                continue
+            except Exception as e:
+                logger.critical('Unhandled OpenAI API error occurred')
+                logger.critical(e)
+                continue
+
+        if success:
+            reply = completion.choices[0].message.content
+        else:
+            reply = "Sorry, I am currently overloaded with requests. Please try again later."
+            logger.warning('Limit of unsuccessfully requests to OpenAI reached')
         return reply
 
 
