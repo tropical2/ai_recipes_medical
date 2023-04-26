@@ -12,7 +12,7 @@ app = Flask(__name__)
 log_level = logging.DEBUG if app.debug else logging.INFO
 
 # Create a custom logger for the application
-logger = logging.getLogger("myapp")
+logger = logging.getLogger("app")
 logger.setLevel(log_level)
 
 formatter = logging.Formatter(

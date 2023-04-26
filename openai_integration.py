@@ -1,7 +1,7 @@
 import openai
 import logging
 
-logger = logging.getLogger()
+logger = logging.getLogger("app.openai_integration")
 
 with open("keys/openai", "r") as f:
     openai.api_key = f.readline()

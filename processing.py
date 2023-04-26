@@ -1,7 +1,7 @@
 import openai_integration
 import logging
 
-logger = logging.getLogger()
+logger = logging.getLogger("app.processing")
 
 def build_prompt(disease, instructions, language="English"):
     logger.debug('Running build_prompt')
