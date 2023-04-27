@@ -29,6 +29,7 @@ document.getElementById("my-form").addEventListener("submit", function(event) {
     console.log("stopped displaying form");
     document.getElementById("loading").style.display = "block";
     console.log("Started displaying loading block");
+    sendHeightToParent();
 
     // Send a POST request with the form data
     fetch(submit_form_url, {
@@ -45,6 +46,7 @@ document.getElementById("my-form").addEventListener("submit", function(event) {
         document.getElementById("output").style.display = "block";
         document.getElementById("output").innerText = output;
         console.log("Started displaying output text");
+        sendHeightToParent();
 
     })
     .catch(error => {
@@ -55,13 +57,11 @@ document.getElementById("my-form").addEventListener("submit", function(event) {
 updateInfo(); // Update the info text when the page loads
 
 
-// give height information to hosting page so that the iframe can be displayed without scrolling
-function postHeightToParent() {
-  var height = document.documentElement.scrollHeight;
-  window.parent.postMessage({ height: height }, '*');
+// give height information to hosting page so that the iframe can be displayed without scrolling. Needs to be triggered during functions that lead to resizing of the page.
+function sendHeightToParent() {
+  const height = document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'adjustHeight', height: height }, '*');
 }
 
-window.onload = function() {
-  postHeightToParent();
-  window.addEventListener('resize', postHeightToParent);
-};
+// Send the initial height.
+sendHeightToParent();
