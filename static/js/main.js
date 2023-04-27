@@ -54,3 +54,14 @@ document.getElementById("my-form").addEventListener("submit", function(event) {
 
 updateInfo(); // Update the info text when the page loads
 
+
+// give height information to hosting page so that the iframe can be displayed without scrolling
+function postHeightToParent() {
+  var height = document.documentElement.scrollHeight;
+  window.parent.postMessage({ height: height }, '*');
+}
+
+window.onload = function() {
+  postHeightToParent();
+  window.addEventListener('resize', postHeightToParent);
+};
