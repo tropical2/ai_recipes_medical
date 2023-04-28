@@ -9,6 +9,8 @@ def build_prompt(disease, instructions, language="English"):
         disease_prompt = "Provide a fitting recipe for a patient with gastroesophageal reflux."
     elif disease == "LPR":
         disease_prompt = "Provide a fitting recipe for a patient with laryngopharyngeal reflux. Avoid acidic foods below pH 5, high-fat foods, fried foods, spicy foods, as well as other common reflux triggers, like chocolate, coffee, garlic, etc..."
+    elif disease == "SIBO":
+        disease_prompt = "Provide a fitting recipe for a patient with small intestinal bacterial overgrowth. Avoid foods that are high in fermentable carbohydrates (FODMAPs). Avoid sugar."
     else:
         disease_prompt = "Provide a fitting recipe for a patient with " + disease + "."
 

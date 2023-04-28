@@ -9,7 +9,7 @@ function updateInfo() {
     } else if (dropdown.value === "GERD") {
         info.innerHTML = "Will avoid typical reflux trigger foods like garlic, spicy foods, fried foods, chocolate, etc.";
     } else if (dropdown.value === "SIBO") {
-        info.innerHTML = "Will avoid typical SIBO trigger foods.";
+        info.innerHTML = "Avoids SIBO trigger foods. Will create low FODMAP recipes. Avoids sugar.";
     }
 
     if (dropdown.value) {
