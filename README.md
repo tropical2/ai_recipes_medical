@@ -1,6 +1,6 @@
 # ChatGPT-Driven Recipe Generator
 
-This project was developed to test the ChatGPT API's capabilities by creating a tool that generates recipes automatically. These recipes are specifically tailored to aid in the dietary management of various diseases as defined by the user's input.
+This project was developed to test the ChatGPT API's capabilities by creating a tool that generates recipes automatically. These recipes are specifically tailored to aid in the dietary management of various diseases as defined by the user's input. The main focus is digestive diseases, mostly acid reflux.
 
 ## Reflux Resources
 
